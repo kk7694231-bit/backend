@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
-const PORT = 5000;
+const dotenv = require('dotenv');
+dotenv.config();
+const PORT = process.env.PORT || 5000;
 const mongoose = require('mongoose');
 const userRoutes = require('./Routes/User');
 const taskRoutes = require('./Routes/Task');
@@ -20,7 +22,7 @@ app.listen(PORT, () => {
     console.log(`backend app running on port ${PORT}`);
 });
 
-mongoose.connect('mongodb://vinsupkishore:vinsupkishore@ac-cimxs3u-shard-00-00.bwcy5qr.mongodb.net:27017,ac-cimxs3u-shard-00-01.bwcy5qr.mongodb.net:27017,ac-cimxs3u-shard-00-02.bwcy5qr.mongodb.net:27017/?ssl=true&replicaSet=atlas-ni0tdb-shard-0&authSource=admin&appName=Cluster0')
+mongoose.connect(process.env.MONGO_URI)
 // mongoose.connect("mongodb://vinsupkishore:vinsupkishore@cluster0.bwcy5qr.mongodb.net/usersDB?retryWrites=true&w=majority")
 .then(() => {
     console.log('Connected to MongoDB');
